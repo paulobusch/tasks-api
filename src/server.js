@@ -8,12 +8,13 @@ const server = express();
 
 const { TestConnection } = require('./database/test-connection');
 const { AppConfig } = require('../config');
-const { Router } = require('./router');
+const { AllowRouter, ProtectedRouter } = require('./router');
 
 server.use(cors());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
-server.use('/api', Router);
+server.use('/oapi', AllowRouter);
+server.use('/oapi', ProtectedRouter);
 
 server.get('/', async (req, res) => {
   await TestConnection.test(async state => {

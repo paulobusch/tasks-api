@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const { Database } = require('../config');
 const { UserSchema } = require('./schemas/user-schema');
 
 const Connection = new Sequelize(
@@ -22,6 +23,11 @@ const Connection = new Sequelize(
 );
 
 const UserDb = UserSchema(Connection);
+
+if (Database.synchronize) {
+  Connection.sync({ force: Database.override })
+    .then(() => console.log(`Tables created!`));
+}
 
 module.exports = {
   Connection,
