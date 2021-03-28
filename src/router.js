@@ -2,7 +2,7 @@ const express = require('express');
 const protectedRouter = express.Router();
 const allowRouter = express.Router();
 
-const { UserController } = require('./controllers/user-controller');
+const { UserController } = require('./controllers/users-controller');
 
 allowRouter.post('/login', UserController.loginAsync);
 allowRouter.post('/logout', UserController.logoutAsync);

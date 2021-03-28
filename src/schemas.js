@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const { Database } = require('../config');
 const { UserSchema } = require('./schemas/user-schema');
+const { TypeSchema } = require('./schemas/type-schema');
 
 const Connection = new Sequelize(
   process.env.DB_NAME,
@@ -23,6 +24,9 @@ const Connection = new Sequelize(
 );
 
 const UserDb = UserSchema(Connection);
+const TypeDb = TypeSchema(Connection);
+
+TypeDb.belongsTo(UserDb, { foreignKey: 'user_id' });
 
 if (Database.synchronize) {
   Connection.sync({ force: Database.override })
@@ -31,5 +35,6 @@ if (Database.synchronize) {
 
 module.exports = {
   Connection,
-  UserDb
+  UserDb,
+  TypeDb
 };

@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-const UserSchema = (sequelize) => {
+const UserSchema = sequelize => {
   const User = sequelize.define('users', {
     id: {
       type: Sequelize.INTEGER,

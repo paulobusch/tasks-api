@@ -4,6 +4,6 @@ module.exports = {
   },
   Database: {
     synchronize: true,
-    override: false
+    override: true
   }
 }
