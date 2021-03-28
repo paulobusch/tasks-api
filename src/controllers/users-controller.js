@@ -8,18 +8,18 @@ class UserController extends BaseController {
   async loginAsync(req, res) {
     const model = getData(new LoginModel(), req);
     const result = await UserService.loginAsync(model);
-    this.sendResult(res, result);
+    super.sendResult(res, result);
   }
 
-  async logoutAsync() {
+  async logoutAsync(req, res) {
     const result = await UserService.logoutAsync();
-    this.sendResult(res, result);
+    super.sendResult(res, result);
   }
 
   async validateTokenAsync(req, res) {
     const model = getData(new TokenModel(), req);
     const result = await UserService.validateTokenAsync(model);
-    this.sendResult(res, result);
+    super.sendResult(res, result);
   }
 }
 

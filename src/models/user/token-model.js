@@ -2,7 +2,7 @@ const { Result } = require("../../utils/models/result");
 const { Error } = require("../../utils/models/error");
 const { Status } = require("../../utils/enums/status");
 
-class TokeModel {
+class TokenModel {
   constructor(
     token
   ) {
@@ -16,5 +16,5 @@ class TokeModel {
 }
 
 module.exports = {
-  TokeModel
-}
+  TokenModel
+};

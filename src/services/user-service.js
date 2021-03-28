@@ -24,7 +24,7 @@ class UserService {
       { expiresIn: parseInt(process.env.EXPIRATION_TOKEN) }
     );
 
-    return Result({ token, user: payload.user });
+    return new Result({ token, user: payload.user });
   }
 
   async logoutAsync() {
@@ -37,13 +37,15 @@ class UserService {
       return validationResult;
 
     return await new Promise(resolve => {
-      jwt.verify(token, process.env.SECRET, async (error, decoded) => {
+      jwt.verify(model.token, process.env.SECRET, async (error, decoded) => {
         if (error) {
-          resolve(new Error(Status.Error, 'It was not possible to verify that the token is valid'));
+          const data = { isValid: false };
+          resolve(new Result(data, undefined, error.message));
           return;
         }
-  
-        resolve(new Result(decoded));
+        
+        const data = { isValid: true, token: decoded  };
+        resolve(new Result(data));
       });
     });
   }

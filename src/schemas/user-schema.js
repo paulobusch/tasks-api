@@ -1,10 +1,11 @@
 const Sequelize = require("sequelize");
+const { NewId } = require("../utils/functions/random");
 
 const UserSchema = sequelize => {
   const User = sequelize.define('users', {
     id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
+      type: Sequelize.STRING(8),
+      defaultValue: NewId,
       primaryKey: true
     },
     email: {

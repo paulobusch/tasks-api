@@ -3,7 +3,7 @@ module.exports = {
     Port: 3003
   },
   Database: {
-    synchronize: true,
-    override: true
+    synchronize: false,
+    override: false
   }
 }

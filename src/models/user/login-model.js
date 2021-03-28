@@ -12,8 +12,8 @@ class LoginModel {
   }
 
   async validateAsync() {
-    if (!this.email) return new Error('Parameter email is required', Status.Invalid);
-    if (!this.password) return new Error('Parameter password is required', Status.Invalid);
+    if (!this.email) return new Error(Status.Invalid, 'Parameter email is required');
+    if (!this.password) return new Error(Status.Invalid, 'Parameter password is required');
     return new Result();
   }
 }

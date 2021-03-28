@@ -1,22 +1,21 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: '.env' });
 
-const cors = require('cors');
-const bodyParser = require('body-parser');
 const express = require('express');
-const server = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const { TestConnection } = require('./database/test-connection');
 const { AppConfig } = require('../config');
 const { AllowRouter, ProtectedRouter } = require('./router');
 
-server.use(cors());
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
-server.use('/oapi', AllowRouter);
-server.use('/oapi', ProtectedRouter);
+const app = express()
+    .use(cors())
+    .use(bodyParser.json())
+    .use('/oapi', AllowRouter)
+    .use('/api', ProtectedRouter);
 
-server.get('/', async (req, res) => {
+app.get('/', async (req, res) => {
   await TestConnection.test(async state => {
     var msg = `
       API Server Tasks Works <br/>
@@ -28,6 +27,6 @@ server.get('/', async (req, res) => {
   });
 });
 
-server.listen(AppConfig.Port, function() {
+app.listen(AppConfig.Port, function() {
   console.log(`SERVER running on port: ${AppConfig.Port}`);
 });
