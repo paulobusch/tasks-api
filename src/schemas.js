@@ -1,6 +1,7 @@
-const Squelize = require('sequelize');
+const Sequelize = require('sequelize');
+const { UserSchema } = require('./schemas/user-schema');
 
-const Connection = new Squelize(
+const Connection = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASS, 
@@ -19,6 +20,10 @@ const Connection = new Squelize(
     }
   }
 );
+
+const UserDb = UserSchema(Connection);
+
 module.exports = {
-  Connection
+  Connection,
+  UserDb
 };

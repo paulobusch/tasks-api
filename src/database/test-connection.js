@@ -1,5 +1,5 @@
 
-const { Connection } = require('./../schemas/schemas');
+const { Connection } = require('./../schemas');
 
 class TestConnection {
     async test(call) {
